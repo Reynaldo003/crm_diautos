@@ -155,54 +155,38 @@ export const ESTADO_INICIAL = {
 
 export function CabeceraRetencion({ segmentoActivo, onCambiarSegmento }) {
     return (
-        <section className="overflow-hidden rounded-xl border border-black/10 bg-[radial-gradient(circle_at_top_left,rgba(201,167,93,0.18),transparent_28%),linear-gradient(135deg,#050505_0%,#0F172A_55%,#050505_100%)] px-4 py-4 text-white shadow-[0_18px_45px_rgba(15,23,42,0.16)] sm:px-5 sm:py-5 lg:px-6 lg:py-6">
-            <div className="flex min-h-[150px] flex-col">
-                <div className="max-w-3xl">
-                    <div className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 sm:text-[11px]">
+        <section className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#0B1120_0%,#0F172A_60%,#0D1526_100%)] px-5 py-5 shadow-xl sm:px-7 lg:px-8">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.03),transparent_24%)]" />
+
+            <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                {/* Lado izquierdo */}
+                <div className="min-w-0 flex-1">
+                    <div className="inline-flex items-center rounded border border-[#C9A75D]/40 bg-[#C9A75D]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7CF98]">
                         Servicio y Partes
                     </div>
-
-                    <h1 className="mt-3 text-2xl font-black tracking-tight sm:text-3xl xl:text-[40px]">
+                    <h1 className="mt-3 text-[2.2rem] font-black leading-none tracking-tight text-white sm:text-[3rem] lg:text-[3.4rem]">
                         Retención de Franjas
                     </h1>
-                </div>
 
-                <div className="pt-6">
-                    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div className="mt-4">
                         <SelectorSegmentos
                             segmentoActivo={segmentoActivo}
                             onCambiarSegmento={onCambiarSegmento}
                             variante="oscuro"
                         />
-
-                        <div className="flex shrink-0 items-end justify-end">
-                            <div className="flex items-end gap-4 xl:gap-5">
-                                <div className="flex h-[44px] w-[60px] items-center justify-center">
-                                    <img
-                                        src={logoChevrolet}
-                                        alt="Chevrolet"
-                                        className="max-h-7 max-w-full object-contain opacity-95"
-                                        loading="lazy"
-                                    />
-                                </div>
-
-                                <div className="flex h-[44px] w-[90px] items-center justify-center">
-                                    <img
-                                        src={logoRyr}
-                                        alt="Grupo Automotriz R&R"
-                                        className="max-h-full max-w-full object-contain opacity-95"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                </div>
+
+                {/* Lado derecho — logos */}
+                <div className="flex items-center gap-4 self-end">
+                    <img src={logoChevrolet} alt="Chevrolet" className="h-7 w-auto object-contain sm:h-8" />
+                    <div className="h-8 w-px bg-white/30" />
+                    <img src={logoRyr} alt="Grupo R&R" className="h-7 w-auto object-contain sm:h-8" />
                 </div>
             </div>
         </section>
     );
 }
-
 export function VistaResumenGeneral({ datos, cargando }) {
     return (
         <section className="space-y-4">

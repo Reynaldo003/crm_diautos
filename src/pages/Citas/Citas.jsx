@@ -19,6 +19,8 @@ import {
     eliminarCita,
     obtenerCitas,
 } from "../../lib/apiCitasCartera";
+import logoChevrolet from "../../assets/logo.png";
+import logoRyr from "../../assets/ryr.png";
 
 const ESTADO_ASISTENCIA = [
     { value: "", label: "Todas" },
@@ -285,68 +287,93 @@ export default function CarteraCitas() {
             {error ? <Alerta tipo="error" mensaje={error} onClose={() => setError("")} /> : null}
             {mensaje ? <Alerta tipo="ok" mensaje={mensaje} onClose={() => setMensaje("")} /> : null}
 
-            <section className="overflow-hidden rounded-lg border border-black/10 bg-[radial-gradient(circle_at_top_left,rgba(201,167,93,0.18),transparent_28%),linear-gradient(135deg,#050505_0%,#0F172A_55%,#050505_100%)] p-5 text-white shadow-[0_24px_60px_rgba(15,23,42,0.18)] lg:p-6">
-                <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
-                    <div>
-                        <div className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
-                            <CalendarDays className="h-4 w-4 text-[#C9A75D]" />
-                            Citas Diautos
-                        </div>
+            {/* Encabezado */}
+            <section className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#0B1120_0%,#0F172A_60%,#0D1526_100%)] px-5 py-5 shadow-xl sm:px-7 lg:px-8">
+                {/* brillo suave igual que Cartera */}
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.03),transparent_24%)]" />
 
-                        <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
+                <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    {/* Lado izquierdo */}
+                    <div className="min-w-0 flex-1">
+                        <div className="inline-flex items-center rounded border border-[#C9A75D]/40 bg-[#C9A75D]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7CF98]">
+                            BDC Posventa
+                        </div>
+                        <h1 className="mt-3 text-[2.2rem] font-black leading-none tracking-tight text-white sm:text-[3rem] lg:text-[3.4rem]">
                             Citas registradas
                         </h1>
-
-                        <p className="mt-3 text-sm font-semibold text-white/65">
+                        <p className="mt-2 text-sm font-semibold text-white/55">
                             Consulta, registra y administra las citas generadas desde cartera.
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
-                        <button
-                            type="button"
-                            onClick={cargarCitas}
-                            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/10 px-4 text-sm font-bold text-white transition hover:bg-white/15"
-                        >
-                            <RefreshCcw className="h-4 w-4" />
-                            Actualizar
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={abrirCrear}
-                            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#C9A75D] px-4 text-sm font-black text-slate-950 shadow-lg shadow-black/20 transition hover:bg-[#d8b96f]"
-                        >
-                            <Plus className="h-4 w-4" />
-                            Nueva cita
-                        </button>
+                    {/* Lado derecho — solo logos */}
+                    <div className="flex flex-wrap items-center gap-4 self-end">
+                        <img
+                            src={logoChevrolet}
+                            alt="Chevrolet"
+                            className="h-7 w-auto object-contain sm:h-8"
+                        />
+                        <div className="h-8 w-px bg-white/30" />
+                        <img
+                            src={logoRyr}
+                            alt="Grupo R&R"
+                            className="h-7 w-auto object-contain sm:h-8"
+                        />
                     </div>
                 </div>
             </section>
 
             <section className="rounded-lg border border-black/10 bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.07)]">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                    <FiltroTexto
-                        label="Buscar"
-                        value={filtros.q}
-                        onChange={(e) => setFiltros((p) => ({ ...p, q: e.target.value }))}
-                        onClear={() => setFiltros((p) => ({ ...p, q: "" }))}
-                    />
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+    <FiltroTexto
+        label="Buscar"
+        value={filtros.q}
+        onChange={(e) => setFiltros((p) => ({ ...p, q: e.target.value }))}
+        onClear={() => setFiltros((p) => ({ ...p, q: "" }))}
+    />
 
-                    <CampoSelect
-                        label="Asistencia"
-                        value={filtros.asistencia}
-                        onChange={(e) => setFiltros((p) => ({ ...p, asistencia: e.target.value }))}
-                    >
-                        {ESTADO_ASISTENCIA.map((item) => (
-                            <option key={item.value} value={item.value}>
-                                {item.label}
-                            </option>
-                        ))}
-                    </CampoSelect>
+    <CampoSelect
+        label="Asistencia"
+        value={filtros.asistencia}
+        onChange={(e) => setFiltros((p) => ({ ...p, asistencia: e.target.value }))}
+    >
+        {ESTADO_ASISTENCIA.map((item) => (
+            <option key={item.value} value={item.value}>
+                {item.label}
+            </option>
+        ))}
+    </CampoSelect>
 
-                    <Kpi titulo="Total citas" valor={citasFiltradas.length} />
-                </div>
+    <Kpi titulo="Total citas" valor={citasFiltradas.length} />
+
+    {/* Botones de acción */}
+    <div className="flex flex-col gap-2">
+        <span className="mb-0.5 block text-xs font-black uppercase tracking-[0.14em] text-slate-500">
+            Acciones
+        </span>
+        <div className="flex gap-2">
+            <button
+                type="button"
+                onClick={cargarCitas}
+                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+            >
+                <RefreshCcw className="h-4 w-4" />
+                Actualizar
+            </button>
+
+            <button
+                type="button"
+                onClick={abrirCrear}
+                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#C9A75D] px-3 text-sm font-black text-slate-950 shadow-lg shadow-black/20 transition hover:bg-[#d8b96f]"
+            >
+                <Plus className="h-4 w-4" />
+                Nueva cita
+            </button>
+        </div>
+    </div>
+</div>
+
+                
 
                 <div className="mt-6 overflow-hidden rounded-lg border border-slate-200">
                     <div className="max-h-[680px] overflow-auto">
@@ -516,7 +543,7 @@ function ModalCita({ open, form, editando, guardando, onClose, onChange, onSubmi
                         <CampoTexto label="Cliente" value={form.nombre || ""} onChange={(e) => onChange("nombre", e.target.value)} />
                         <CampoTexto label="Teléfono" value={form.telefono || ""} onChange={(e) => onChange("telefono", e.target.value)} />
                         <CampoTexto label="Correo" value={form.correo || ""} onChange={(e) => onChange("correo", e.target.value)} />
-                        
+
                         <CampoSelect label="Auto de interés / Modelo" value={form.auto_interes || ""} onChange={(e) => onChange("auto_interes", e.target.value)}>
                             <option value="">Selecciona un vehículo...</option>
                             {VEHICULOS.map((auto) => (
@@ -537,7 +564,7 @@ function ModalCita({ open, form, editando, guardando, onClose, onChange, onSubmi
                         <CampoTexto label="Hora" type="time" value={form.hora || ""} onChange={(e) => onChange("hora", e.target.value)} />
                         <CampoTexto label="Fuente prospección" value={form.fuente_prospeccion || ""} onChange={(e) => onChange("fuente_prospeccion", e.target.value)} />
                         <CampoTexto label="Asesor digital" value={form.asesor_digital || ""} onChange={(e) => onChange("asesor_digital", e.target.value)} />
-                        
+
                         <CampoSelect label="Asesor Piso" value={form.asesor_piso || ""} onChange={(e) => onChange("asesor_piso", e.target.value)}>
                             <option value="">Selecciona asesor...</option>
                             {ASESORES.map((asesor) => (

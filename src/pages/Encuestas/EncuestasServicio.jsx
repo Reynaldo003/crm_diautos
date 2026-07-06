@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 
 import { apiServicio } from "../../lib/apiServicio";
+import logoChevrolet from "../../assets/logo.png";
+import logoRyr from "../../assets/ryr.png";
 
 const BRAND_BLACK = "#111111";
 const BRAND_GOLD_DARK = "#9F7E2F";
@@ -128,10 +130,9 @@ function Field({ label, icon: Icon, children }) {
 function FilterBlock({ label, children }) {
     return (
         <div className="rounded-lg">
-            <div className="mb-2 text-xs font-extrabold tracking-wide text-[#C9A75D]">
+            <div className="mb-2 text-xs font-extrabold tracking-wide text-slate-500">
                 {label}
             </div>
-
             {children}
         </div>
     );
@@ -571,30 +572,45 @@ export default function EncuestasServicio() {
 
     return (
         <div className="w-full">
-            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="min-w-0">
-                    <h2 className="truncate text-lg font-extrabold text-[#C9A75D]">
-                        Registro de Encuestas de Servicio
-                    </h2>
+            {/* Encabezado */}
+            <section className="relative mb-6 overflow-hidden rounded-lg bg-[linear-gradient(135deg,#0B1120_0%,#0F172A_60%,#0D1526_100%)] px-5 py-5 shadow-xl sm:px-7 lg:px-8">
+                {/* brillo suave igual que Cartera */}
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.03),transparent_24%)]" />
 
-                    <p className="mt-1 text-xs font-semibold text-slate-500">
-                        Consulta general de encuestas registradas desde el formulario de servicio.
-                    </p>
+                <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    {/* Lado izquierdo */}
+                    <div className="min-w-0 flex-1">
+                        <div className="inline-flex items-center rounded border border-[#C9A75D]/40 bg-[#C9A75D]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7CF98]">
+                            BDC Posventa
+                        </div>
+                        <h1 className="mt-3 text-[2.2rem] font-black leading-none tracking-tight text-white sm:text-[3rem] lg:text-[3.4rem]">
+                            Registro de Encuestas de Servicio
+                        </h1>
+                        <p className="mt-2 text-sm font-semibold text-white/55">
+                            Consulta general de encuestas registradas desde el formulario de servicio.
+                        </p>
+                    </div>
+
+                    {/* Lado derecho — botón recargar + logos, alineados al nivel del título */}
+                    <div className="flex items-center gap-4 self-end">
+
+
+                        <div className="h-8 w-px bg-white/30" />
+
+                        <img
+                            src={logoChevrolet}
+                            alt="Chevrolet"
+                            className="h-7 w-auto object-contain sm:h-8"
+                        />
+                        <div className="h-8 w-px bg-white/30" />
+                        <img
+                            src={logoRyr}
+                            alt="Grupo R&R"
+                            className="h-7 w-auto object-contain sm:h-8"
+                        />
+                    </div>
                 </div>
-
-                <button
-                    onClick={refreshList}
-                    disabled={loadingList}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#C9A75D] px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-[#C9A75D]/80 disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                    {loadingList ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                        <RefreshCcw className="h-4 w-4" />
-                    )}
-                    Recargar
-                </button>
-            </div>
+            </section>
 
             {errorList ? (
                 <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
@@ -697,12 +713,25 @@ export default function EncuestasServicio() {
                         <FilterBlock label="Acciones">
                             <div className="grid grid-cols-2 gap-2 md:grid-cols-1">
                                 <button
+                                    onClick={refreshList}
+                                    disabled={loadingList}
+                                               className="inline-flex h-11 items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 text-sm font-bold text-slate-700 transition hover:bg-slate-50">
+
+                                    {loadingList ? (
+                                        <Loader2 className="h-4 w-4 animate-spin" />
+                                    ) : (
+                                        <RefreshCcw className="h-4 w-4" />
+                                    )}
+                                    Recargar
+                                </button>
+                                <button
                                     onClick={setHoy}
                                     className="inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-700 bg-emerald-600 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
                                     title="Mostrar solo registros del día de hoy"
                                 >
                                     <CalendarDays className="h-4 w-4" />
                                 </button>
+
 
                                 <button
                                     onClick={resetFilters}
@@ -722,7 +751,7 @@ export default function EncuestasServicio() {
             <div className="hidden overflow-hidden rounded-lg bg-white shadow-lg lg:block">
                 <div className="overflow-auto">
                     <table className="min-w-full text-left text-sm">
-                        <thead className="bg-[#C9A75D] text-xs text-white">
+                        <thead className="bg-[#0F172A] text-xs text-white">
                             <tr>
                                 <th className="px-4 py-3">
                                     <button

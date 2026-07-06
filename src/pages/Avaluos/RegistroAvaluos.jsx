@@ -40,6 +40,8 @@ import {
 
 import { apiAvaluos } from "../../lib/apiAvaluos";
 import { useAuth } from "../../auth/AuthContext";
+import logoChevrolet from "../../assets/logo.png";
+import logoRyr from "../../assets/ryr.png";
 
 const CHEVY_GOLD = "#F2C94C";
 const CHEVY_GOLD_DARK = "#C99A00";
@@ -3348,7 +3350,7 @@ export default function RegistroAvaluos() {
 
     return (
         <div
-            className="w-full"
+            className="w-full space-y-6"
             style={{
                 "--chevy-gold": CHEVY_GOLD,
                 "--chevy-gold-dark": CHEVY_GOLD_DARK,
@@ -3357,69 +3359,43 @@ export default function RegistroAvaluos() {
                 "--chevy-soft": CHEVY_SOFT,
             }}
         >
-            <div className="mb-4 overflow-hidden rounded-2xl border border-yellow-500/30 bg-white shadow-sm">
-                <div
-                    className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
-                    style={{
-                        background: `linear-gradient(135deg, ${CHEVY_BLACK}, ${CHEVY_DARK})`,
-                    }}
-                >
-                    <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                            <div
-                                className="h-3 w-3 rounded-full"
-                                style={{ backgroundColor: CHEVY_GOLD }}
-                            />
-
-                            <h2 className="truncate text-lg font-extrabold text-white">
-                                Avalúos Chevrolet
-                            </h2>
+            {/* Encabezado */}
+            <section className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#0B1120_0%,#0F172A_60%,#0D1526_100%)] px-5 py-5 shadow-xl sm:px-7 lg:px-8">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.03),transparent_24%)]" />
+               <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="min-w-0 flex-1">
+                        <div className="inline-flex items-center rounded border border-[#C9A75D]/40 bg-[#C9A75D]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7CF98]">
+                            Seminuevos
                         </div>
+                        <h1 className="mt-3 text-[2.2rem] font-black leading-none tracking-tight text-white sm:text-[3rem] lg:text-[3.4rem]">
+                            Avalúos Chevrolet
+                        </h1>
                     </div>
-
-                    <button
-                        type="button"
-                        onClick={openCreate}
-                        disabled={auth.loadingSesion}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-yellow-400 px-4 py-2 text-sm font-extrabold text-slate-950 shadow-sm hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                        {auth.loadingSesion ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                            <Plus className="h-4 w-4" />
-                        )}
-                        Nuevo avalúo
-                    </button>
+                    <div className="flex items-center gap-4 self-end">
+                        <img src={logoChevrolet} alt="Chevrolet" className="h-7 w-auto object-contain sm:h-8" />
+                        <div className="h-8 w-px bg-white/30" />
+                        <img src={logoRyr} alt="Grupo R&R" className="h-7 w-auto object-contain sm:h-8" />
+                    </div>
                 </div>
+            </section>
 
+            {/* Filtros */}
+            <div className="overflow-hidden rounded-2xl border border-yellow-500/30 bg-white shadow-sm">
                 <div className="border-t border-yellow-500/20 bg-yellow-50/70 px-4 py-3">
                     <div className="grid gap-3 md:grid-cols-12">
                         <div className="md:col-span-6">
                             <FilterBlock label="Búsqueda">
                                 <div className="flex items-center gap-2 rounded-xl border border-yellow-500/40 bg-white px-3 py-2 shadow-sm">
                                     <Search className="h-4 w-4 text-yellow-700" />
-
                                     <input
                                         value={filters.q}
-                                        onChange={(event) =>
-                                            setFilters((prev) => ({
-                                                ...prev,
-                                                q: event.target.value,
-                                            }))
-                                        }
+                                        onChange={(event) => setFilters((prev) => ({ ...prev, q: event.target.value }))}
                                         placeholder="Buscar por cliente, teléfono, placas, serie, modelo, asesor..."
                                         className="w-full text-sm font-semibold text-slate-950 outline-none placeholder:text-slate-400"
                                     />
-
                                     {filters.q ? (
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setFilters((prev) => ({ ...prev, q: "" }))
-                                            }
-                                            className="rounded-lg p-1 text-slate-600 hover:bg-red-50 hover:text-red-600"
-                                            aria-label="Limpiar búsqueda"
-                                        >
+                                        <button type="button" onClick={() => setFilters((prev) => ({ ...prev, q: "" }))}
+                                            className="rounded-lg p-1 text-slate-600 hover:bg-red-50 hover:text-red-600">
                                             <X className="h-4 w-4" />
                                         </button>
                                     ) : null}
@@ -3429,44 +3405,29 @@ export default function RegistroAvaluos() {
 
                         <div className="md:col-span-3">
                             <FilterBlock label="Dealer">
-                                <select
-                                    value={filters.agencia}
-                                    onChange={(event) =>
-                                        setFilters((prev) => ({
-                                            ...prev,
-                                            agencia: event.target.value,
-                                        }))
-                                    }
-                                    className="w-full rounded-xl border border-yellow-500/40 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200"
-                                >
-                                    {dealers.map((dealer) => (
-                                        <option key={dealer} value={dealer}>
-                                            {dealer}
-                                        </option>
-                                    ))}
+                                <select value={filters.agencia}
+                                    onChange={(event) => setFilters((prev) => ({ ...prev, agencia: event.target.value }))}
+                                    className="w-full rounded-xl border border-yellow-500/40 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200">
+                                    {dealers.map((dealer) => <option key={dealer} value={dealer}>{dealer}</option>)}
                                 </select>
                             </FilterBlock>
                         </div>
 
                         <div className="md:col-span-3">
                             <FilterBlock label="Acciones">
-                                <div className="grid grid-cols-2 gap-2">
-                                    <button
-                                        type="button"
-                                        onClick={setHoy}
-                                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-3 py-2 text-sm font-bold text-white hover:bg-slate-800"
-                                    >
-                                        <CalendarDays className="h-4 w-4" />
-                                        Hoy
+                                <div className="grid grid-cols-3 gap-2">
+                                    <button type="button" onClick={setHoy}
+                                        className="inline-flex items-center justify-center gap-1 rounded-xl bg-slate-950 px-2 py-2 text-xs font-bold text-white hover:bg-slate-800">
+                                        <CalendarDays className="h-3.5 w-3.5" />Hoy
                                     </button>
-
-                                    <button
-                                        type="button"
-                                        onClick={resetFilters}
-                                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-yellow-500/50 bg-white px-3 py-2 text-sm font-bold text-slate-950 hover:bg-yellow-100"
-                                    >
-                                        <X className="h-4 w-4" />
-                                        Limpiar
+                                    <button type="button" onClick={resetFilters}
+                                        className="inline-flex items-center justify-center gap-1 rounded-xl border border-yellow-500/50 bg-white px-2 py-2 text-xs font-bold text-slate-950 hover:bg-yellow-100">
+                                        <X className="h-3.5 w-3.5" />Limpiar
+                                    </button>
+                                    <button type="button" onClick={openCreate} disabled={auth.loadingSesion}
+                                        className="inline-flex items-center justify-center gap-1 rounded-xl bg-[#C9A75D] px-2 py-2 text-xs font-black text-slate-950 shadow-lg shadow-black/20 transition hover:bg-[#d8b96f] disabled:cursor-not-allowed disabled:opacity-60">
+                                        {auth.loadingSesion ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
+                                        Nuevo
                                     </button>
                                 </div>
                             </FilterBlock>
@@ -3474,33 +3435,17 @@ export default function RegistroAvaluos() {
 
                         <div className="md:col-span-6">
                             <FilterBlock label="Desde">
-                                <input
-                                    type="date"
-                                    value={filters.rangoDesde}
-                                    onChange={(event) =>
-                                        setFilters((prev) => ({
-                                            ...prev,
-                                            rangoDesde: event.target.value,
-                                        }))
-                                    }
-                                    className="w-full rounded-xl border border-yellow-500/40 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200"
-                                />
+                                <input type="date" value={filters.rangoDesde}
+                                    onChange={(event) => setFilters((prev) => ({ ...prev, rangoDesde: event.target.value }))}
+                                    className="w-full rounded-xl border border-yellow-500/40 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                             </FilterBlock>
                         </div>
 
                         <div className="md:col-span-6">
                             <FilterBlock label="Hasta">
-                                <input
-                                    type="date"
-                                    value={filters.rangoHasta}
-                                    onChange={(event) =>
-                                        setFilters((prev) => ({
-                                            ...prev,
-                                            rangoHasta: event.target.value,
-                                        }))
-                                    }
-                                    className="w-full rounded-xl border border-yellow-500/40 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200"
-                                />
+                                <input type="date" value={filters.rangoHasta}
+                                    onChange={(event) => setFilters((prev) => ({ ...prev, rangoHasta: event.target.value }))}
+                                    className="w-full rounded-xl border border-yellow-500/40 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                             </FilterBlock>
                         </div>
                     </div>
