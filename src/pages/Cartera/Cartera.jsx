@@ -122,6 +122,11 @@ const ASESORES = [
   "KARINA CORTES", "LORENZA RINCON", "LUIS DAVID CASTILLO", "MAGDALENA MOLINA",
   "PEDRO MENDOZA", "RAQUEL SOLIS", "REYNA MORA", "ROMAN LUGO", "SILVIA LARA",
   "CASA", "GRISELDA NEVAREZ", "EDER MONTERO", "GASPAR PANTOJA",
+  "JESSICA AURORA PEREZ MARCIAL",
+  "RODOLFO GABRIEL PENSAMIENTO SANCHEZ",
+  "ERIKA LIZETT HERRERA REYES",
+  "ROXANA RIVADENEYRA ROSADO",
+  "JULIETA DEL ROSARIO TEJEDA PEÑA",
 ];
 
 const VEHICULOS = [
@@ -406,7 +411,7 @@ export default function Cartera() {
               </p>
             )}
             <div className="mt-4">
-              
+
             </div>
           </div>
 

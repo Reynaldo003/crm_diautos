@@ -56,6 +56,11 @@ const ASESORES = [
     "GRISELDA NEVAREZ",
     "EDER MONTERO",
     "GASPAR PANTOJA",
+    "JESSICA AURORA PEREZ MARCIAL",
+    "RODOLFO GABRIEL PENSAMIENTO SANCHEZ",
+    "ERIKA LIZETT HERRERA REYES",
+    "ROXANA RIVADENEYRA ROSADO",
+    "JULIETA DEL ROSARIO TEJEDA PEÑA",
 ];
 
 const VEHICULOS = [
@@ -325,55 +330,55 @@ export default function CarteraCitas() {
 
             <section className="rounded-lg border border-black/10 bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.07)]">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-    <FiltroTexto
-        label="Buscar"
-        value={filtros.q}
-        onChange={(e) => setFiltros((p) => ({ ...p, q: e.target.value }))}
-        onClear={() => setFiltros((p) => ({ ...p, q: "" }))}
-    />
+                    <FiltroTexto
+                        label="Buscar"
+                        value={filtros.q}
+                        onChange={(e) => setFiltros((p) => ({ ...p, q: e.target.value }))}
+                        onClear={() => setFiltros((p) => ({ ...p, q: "" }))}
+                    />
 
-    <CampoSelect
-        label="Asistencia"
-        value={filtros.asistencia}
-        onChange={(e) => setFiltros((p) => ({ ...p, asistencia: e.target.value }))}
-    >
-        {ESTADO_ASISTENCIA.map((item) => (
-            <option key={item.value} value={item.value}>
-                {item.label}
-            </option>
-        ))}
-    </CampoSelect>
+                    <CampoSelect
+                        label="Asistencia"
+                        value={filtros.asistencia}
+                        onChange={(e) => setFiltros((p) => ({ ...p, asistencia: e.target.value }))}
+                    >
+                        {ESTADO_ASISTENCIA.map((item) => (
+                            <option key={item.value} value={item.value}>
+                                {item.label}
+                            </option>
+                        ))}
+                    </CampoSelect>
 
-    <Kpi titulo="Total citas" valor={citasFiltradas.length} />
+                    <Kpi titulo="Total citas" valor={citasFiltradas.length} />
 
-    {/* Botones de acción */}
-    <div className="flex flex-col gap-2">
-        <span className="mb-0.5 block text-xs font-black uppercase tracking-[0.14em] text-slate-500">
-            Acciones
-        </span>
-        <div className="flex gap-2">
-            <button
-                type="button"
-                onClick={cargarCitas}
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
-            >
-                <RefreshCcw className="h-4 w-4" />
-                Actualizar
-            </button>
+                    {/* Botones de acción */}
+                    <div className="flex flex-col gap-2">
+                        <span className="mb-0.5 block text-xs font-black uppercase tracking-[0.14em] text-slate-500">
+                            Acciones
+                        </span>
+                        <div className="flex gap-2">
+                            <button
+                                type="button"
+                                onClick={cargarCitas}
+                                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+                            >
+                                <RefreshCcw className="h-4 w-4" />
+                                Actualizar
+                            </button>
 
-            <button
-                type="button"
-                onClick={abrirCrear}
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#C9A75D] px-3 text-sm font-black text-slate-950 shadow-lg shadow-black/20 transition hover:bg-[#d8b96f]"
-            >
-                <Plus className="h-4 w-4" />
-                Nueva cita
-            </button>
-        </div>
-    </div>
-</div>
+                            <button
+                                type="button"
+                                onClick={abrirCrear}
+                                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#C9A75D] px-3 text-sm font-black text-slate-950 shadow-lg shadow-black/20 transition hover:bg-[#d8b96f]"
+                            >
+                                <Plus className="h-4 w-4" />
+                                Nueva cita
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                
+
 
                 <div className="mt-6 overflow-hidden rounded-lg border border-slate-200">
                     <div className="max-h-[680px] overflow-auto">

@@ -269,6 +269,11 @@ const ASESORES = [
     "GRISELDA NEVAREZ",
     "EDER MONTERO",
     "GASPAR PANTOJA",
+    "JESSICA AURORA PEREZ MARCIAL",
+    "RODOLFO GABRIEL PENSAMIENTO SANCHEZ",
+    "ERIKA LIZETT HERRERA REYES",
+    "ROXANA RIVADENEYRA ROSADO",
+    "JULIETA DEL ROSARIO TEJEDA PEÑA",
 ];
 
 const ETAPAS_PROCESO = [
@@ -3362,7 +3367,7 @@ export default function RegistroAvaluos() {
             {/* Encabezado */}
             <section className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#0B1120_0%,#0F172A_60%,#0D1526_100%)] px-5 py-5 shadow-xl sm:px-7 lg:px-8">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.03),transparent_24%)]" />
-               <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div className="min-w-0 flex-1">
                         <div className="inline-flex items-center rounded border border-[#C9A75D]/40 bg-[#C9A75D]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7CF98]">
                             Seminuevos
